@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 import userRouter from './routes/user.route.js';
+import authRouter from './routes/auth.route.js';
 
 // Connect to Mongoose
 mongoose.connect(process.env.MONGODB_URL)
@@ -12,8 +13,13 @@ mongoose.connect(process.env.MONGODB_URL)
 
 const app = express();
 
+// to allow json input to the server
+app.use(express.json());
+
 // routes
 app.use("/api/user", userRouter);
+app.use("/api/auth", authRouter);
+
 // Listening a server
 app.listen(3000, () => {
   console.log("Server listening on port 3000...");
