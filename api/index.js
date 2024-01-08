@@ -6,12 +6,12 @@ dotenv.config();
 import userRouter from './routes/user.route.js';
 import authRouter from './routes/auth.route.js';
 
+const app = express();
+
 // Connect to Mongoose
 mongoose.connect(process.env.MONGODB_URL)
 .then(() => console.log("Connected to MongoDB"))
 .catch((err) => console.log(err))
-
-const app = express();
 
 // to allow json input to the server
 app.use(express.json());
@@ -30,6 +30,7 @@ app.use((err, req, res, next) => {
     message
   })
 });
+
 // Listening a server
 app.listen(3000, () => {
   console.log("Server listening on port 3000...");
