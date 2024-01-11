@@ -1,6 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import cookieParser from 'cookie-parser';
 dotenv.config();
 
 import userRouter from './routes/user.route.js';
@@ -16,6 +17,8 @@ mongoose.connect(process.env.MONGODB_URL)
 // to allow json input to the server
 app.use(express.json());
 
+// to get information from cookies
+app.use(cookieParser());
 // routes
 app.use("/api/user", userRouter);
 app.use("/api/auth", authRouter);
